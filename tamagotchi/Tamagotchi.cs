@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace tamagotchi
 {
     public class Tamagotchi
     {
         private int hunger;
         private int boredom;
-        private List<string> words = new List<string>();
+        private List<string> words = new List<string>() { "Woof!" };
         private bool isAlive = true;
         private Random generator = new Random();
         public string name;
@@ -15,13 +16,27 @@ namespace tamagotchi
 
         public void Feed()
         {
-            hunger--;
+            hunger = hunger - 2;
+
+            if (hunger <= 0)
+            {
+                hunger = -1;
+            }
         }
 
         public void Hi()
         {
             int index = generator.Next(words.Count);
-            Console.WriteLine(words[index]);
+            Console.Write($@"
+
+
+
+                               {name}:       {words[index]}
+                            
+
+
+
+");
 
             ReduceBoredom();
         }
@@ -48,7 +63,8 @@ namespace tamagotchi
             GetAlive();
             if (isAlive == true)
             {
-                Console.WriteLine($"Your Tamagotchi is alive.   Hunger: {hunger}     Boredom: {boredom}");
+                Console.WriteLine($@"
+                Your Tamagotchi is alive.   Hunger: {hunger}     Boredom: {boredom}");
             }
             else
             {
@@ -63,7 +79,7 @@ namespace tamagotchi
 
         private void ReduceBoredom()
         {
-            boredom--;
+            boredom = boredom - 2;
         }
     }
 }
