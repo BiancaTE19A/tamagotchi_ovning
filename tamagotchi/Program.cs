@@ -12,19 +12,41 @@ namespace tamagotchi
             avatar.name = Setup();
             DogArt();
             Choices(avatar);
-
+            Console.WriteLine("Your Tamagitchi is dead");
             Console.ReadLine();
         }
 
         static void Choices(Tamagotchi t)
         {
-            string userChoice = "";
-            Console.WriteLine($"What do you want to do?       Feed, Teach, Greet, Nothing");
-            userChoice = Console.ReadLine();
+            bool tIsAlive = t.GetAlive();
+            t.PrintStats();
 
-            if (userChoice.ToLower() == "feed")
+            string userChoice = "";
+
+            while (tIsAlive)
             {
-                t.Feed();
+                Console.WriteLine($"What do you want to do?       Feed, Greet, Teach or Nothing");
+
+                userChoice = Console.ReadLine();
+
+                if (userChoice.ToLower() == "feed")
+                {
+                    t.Feed();
+                }
+                if (userChoice.ToLower() == "greet")
+                {
+                    t.Hi();
+                }
+                if (userChoice.ToLower() == "teach")
+                {
+                    t.Teach(Console.ReadLine());
+                }
+                if (userChoice.ToLower() == "nothing")
+                {
+                    Console.WriteLine("You chose to do nothing.");
+                }
+                tIsAlive = t.GetAlive();
+                t.Tick();
             }
 
         }

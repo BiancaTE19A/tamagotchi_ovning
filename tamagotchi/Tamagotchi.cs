@@ -8,14 +8,14 @@ namespace tamagotchi
         private int hunger;
         private int boredom;
         private List<string> words = new List<string>();
-        private bool isAlive;
+        private bool isAlive = true;
         private Random generator = new Random();
         public string name;
+
 
         public void Feed()
         {
             hunger--;
-
         }
 
         public void Hi()
